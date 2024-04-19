@@ -20,7 +20,7 @@ const PDFSinglePage: FC<Props> = ({ pageNum }) => {
   const _pageNum = pageNum || currentPage;
 
   return (
-    <PageWrapper id="pdf-page-wrapper" last={_pageNum >= numPages}>
+    <PageWrapper id="pdf-page-wrapper">
       {!paginated && (
         <PageTag id="pdf-page-info">
           {t("pdfPluginPageNumber", {
