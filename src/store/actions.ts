@@ -64,7 +64,8 @@ export const previousDocument = (): PreviousDocument => ({
 
 export const updateCurrentDocument = (
   document: IDocument,
-): UpdateCurrentDocument => ({ type: UPDATE_CURRENT_DOCUMENT, document });
+): UpdateCurrentDocument => ({ type: UPDATE_CURRENT_DOCUMENT, document })
+
 
 export const setRendererRect = (rect: DOMRect): SetRendererRect => ({
   type: SET_RENDERER_RECT,
