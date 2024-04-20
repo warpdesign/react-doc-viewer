@@ -58,8 +58,13 @@ export const useDocumentLoader = (): {
         })
         .catch((error) => {
           if (error?.name !== "AbortError") {
+            // Don't get stuck with the loading component
+            // if we can't fetch the filetype: we'll show
+            // the no renderer component instead
+            dispatch(setDocumentLoading(false));
             throw error;
           }
+
         });
 
       return () => {
@@ -73,7 +78,8 @@ export const useDocumentLoader = (): {
   // File changed and/or renderer changed:
   // fetch entire file and update current document
   useEffect(() => {
-    if (!currentDocument || CurrentRenderer === undefined) return;
+    if (!currentDocument || CurrentRenderer === undefined)
+      return
 
     const controller = new AbortController();
     const { signal } = controller;
