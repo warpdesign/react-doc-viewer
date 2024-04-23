@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import papaparse from "papaparse";
-import { DocRenderer } from "../..";
+import { DocRenderer, IStyledProps } from "../..";
 import { textFileLoader } from "../../utils/fileLoaders";
 
 const CSVRenderer: DocRenderer = ({
@@ -30,18 +30,19 @@ const CSVRenderer: DocRenderer = ({
       <Table>
         <thead>
           <tr>
-            {rows[0].map((column) => (
-              <th key={column}>{column}</th>
+            {rows[0].map((column, i) => (
+              <th key={`head_${i}`}>{column}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {rows.slice(1, rows.length).map((row) => (
-            <tr key={row.join("")}>
-              {row.map((column) => (
-                <td key={column}>{column}</td>
+          {rows.map((row, i) => (
+            i ? <tr key={`row_${i}`}>
+              {row.map((column, j) => (
+                <td key={`col_${i}_${j}`}>{column}</td>
               ))}
             </tr>
+            : null
           ))}
         </tbody>
       </Table>
@@ -62,13 +63,21 @@ const Container = styled.div`
 const Table = styled.table`
   width: 100%;
   text-align: left;
+  border-collapse: collapse;
+  border: 1px solid ${(props: IStyledProps) => props.theme.textTertiary};
+  background-color: ${(props: IStyledProps) => props.theme.tertiary};
+
+  td {
+    white-space: nowrap;
+  }
 
   th,
   td {
     padding: 5px 10px;
+    border: 1px solid ${(props: IStyledProps) => props.theme.textTertiary};
+  }
 
-    &:empty {
-      display: none;
-    }
+  tr {
+    vertical-align: top;
   }
 `;
