@@ -8,12 +8,14 @@ import { setNumPages } from "../../state/actions";
 import { initialPDFState } from "../../state/reducer";
 import { PDFAllPages } from "./PDFAllPages";
 import PDFSinglePage from "./PDFSinglePage";
+import { DocViewerContext } from "../../../../store/DocViewerProvider";
 
 const PDFPages: FC<{}> = () => {
   const {
-    state: { mainState, paginated },
+    state: { paginated },
     dispatch,
   } = useContext(PDFContext);
+  const { state: mainState } = useContext(DocViewerContext);  
   const { t } = useTranslation();
 
   const currentDocument = mainState?.currentDocument || null;
@@ -39,6 +41,7 @@ const DocumentPDF = styled(Document)`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  max-width: 100%;
 `;
 
 export default PDFPages;

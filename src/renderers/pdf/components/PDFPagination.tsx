@@ -1,5 +1,5 @@
 import React, { FC, useContext } from "react";
-import styled from "styled-components";
+import styled, { DefaultTheme, ThemeContext } from "styled-components";
 import { Button } from "../../../components/common";
 import { IStyledProps } from "../../..";
 import { PDFContext } from "../state";
@@ -14,6 +14,10 @@ const PDFPagination: FC<{}> = () => {
   } = useContext(PDFContext);
   const { t } = useTranslation();
 
+  const {
+    textPrimary
+  } = useContext(ThemeContext) as DefaultTheme
+
   return (
     <Container id="pdf-pagination">
       <PageNavButtonLeft
@@ -21,7 +25,7 @@ const PDFPagination: FC<{}> = () => {
         onClick={() => dispatch(setCurrentPage(currentPage - 1))}
         disabled={currentPage === 1}
       >
-        <PrevPDFNavIcon color="#000" size="50%" />
+        <PrevPDFNavIcon color={textPrimary} size="50%" />
       </PageNavButtonLeft>
 
       <PageTag id="pdf-pagination-info">
@@ -36,7 +40,7 @@ const PDFPagination: FC<{}> = () => {
         onClick={() => dispatch(setCurrentPage(currentPage + 1))}
         disabled={currentPage >= numPages}
       >
-        <NextPDFNavIcon color="#000" size="50%" />
+        <NextPDFNavIcon color={textPrimary} size="50%" />
       </PageNavButtonRight>
     </Container>
   );

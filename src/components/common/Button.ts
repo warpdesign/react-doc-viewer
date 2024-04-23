@@ -6,12 +6,10 @@ interface ButtonProps extends IStyledProps {
 }
 
 export const ButtonPrimaryStyle = css`
-  background-color: ${(props: IStyledProps) => props.theme.primary};
   color: ${(props: IStyledProps) => props.theme.textPrimary};
 `;
 
 export const ButtonSecondaryStyle = css`
-  background-color: ${(props: IStyledProps) => props.theme.secondary};
   color: ${(props: IStyledProps) => props.theme.textSecondary};
 `;
 
@@ -33,7 +31,7 @@ export const Button = styled.button<ButtonProps>`
   border-radius: 35px;
   opacity: ${(props) => (props.disabled ? 0.4 : 1)};
   pointer-events: ${(props) => (props.disabled ? "none" : "all")};
-  box-shadow: 2px 2px 3px #00000033;
+  background-color: transparent;
 
   @media (max-width: 768px) {
     width: 30px;
@@ -50,10 +48,7 @@ export const LinkButton = styled.a`
   outline: none;
   cursor: pointer;
   text-decoration: none;
-  border-radius: 35px;
-  background-color: ${(props: IStyledProps) => props.theme.primary};
   color: ${(props: IStyledProps) => props.theme.textPrimary};
-  box-shadow: 2px 2px 3px #00000033;
 
   width: 35px;
   height: 35px;
