@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { IStyledProps } from "../../../..";
 import { useTranslation } from "../../../../hooks/useTranslation";
 import { PDFContext } from "../../state";
+import { DocViewerContext } from "../../../../store/DocViewerProvider";
 
 interface Props {
   pageNum?: number;
@@ -11,8 +12,9 @@ interface Props {
 
 const PDFSinglePage: FC<Props> = ({ pageNum }) => {
   const {
-    state: { mainState, paginated, zoomLevel, numPages, currentPage },
+    state: { paginated, zoomLevel, numPages, currentPage },
   } = useContext(PDFContext);
+  const { state: mainState } = useContext(DocViewerContext);
   const { t } = useTranslation();
 
   const rendererRect = mainState?.rendererRect || null;

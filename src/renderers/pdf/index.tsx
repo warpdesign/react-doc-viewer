@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { pdfjs } from "react-pdf";
 import styled from "styled-components";
 import { DocRenderer, IStyledProps } from "../..";
 import PDFPages from "./components/pages/PDFPages";
 import PDFControls from "./components/PDFControls";
-import { PDFProvider } from "./state";
+import { PDFContext, PDFProvider } from "./state";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
@@ -15,7 +15,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = 'pdf.worker.min.js'
 
 const PDFRenderer: DocRenderer = ({ mainState }) => {
   return (
-    <PDFProvider mainState={mainState}>
+    <PDFProvider>
       <Container id="pdf-renderer" data-testid="pdf-renderer">
         <PDFControls />
         <PDFPages />

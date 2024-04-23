@@ -1,14 +1,12 @@
 import React, { FC, useContext } from "react";
-import styled from "styled-components";
-import { Button, LinkButton } from "../../../components/common";
+import styled, { DefaultTheme, ThemeContext } from "styled-components";
+import { Button } from "../../../components/common";
 import { IStyledProps } from "../../..";
 import { PDFContext } from "../state";
-import { setPDFPaginated, setZoomLevel } from "../state/actions";
+import { setZoomLevel } from "../state/actions";
 import { useTranslation } from "../../../hooks/useTranslation";
 import {
-  DownloadPDFIcon,
   ResetZoomPDFIcon,
-  TogglePaginationPDFIcon,
   ZoomInPDFIcon,
   ZoomOutPDFIcon,
 } from "./icons";
@@ -18,7 +16,6 @@ const PDFControls: FC<{}> = () => {
   const { t } = useTranslation();
   const {
     state: {
-      mainState,
       paginated,
       zoomLevel,
       numPages,
@@ -27,36 +24,26 @@ const PDFControls: FC<{}> = () => {
     },
     dispatch,
   } = useContext(PDFContext);
-
-  const currentDocument = mainState?.currentDocument || null;
+  const {
+    textPrimary
+  } = useContext(ThemeContext) as DefaultTheme
 
   return (
     <Container id="pdf-controls">
       {paginated && numPages > 1 && <PDFPagination />}
 
-      {currentDocument?.fileData && (
-        <DownloadButton
-          id="pdf-download"
-          href={currentDocument?.fileData as string}
-          download={currentDocument?.fileName || currentDocument?.uri}
-          title={t("downloadButtonLabel")}
-        >
-          <DownloadPDFIcon color="#000" size="75%" />
-        </DownloadButton>
-      )}
-
       <ControlButton
         id="pdf-zoom-out"
         onMouseDown={() => dispatch(setZoomLevel(zoomLevel - zoomJump))}
       >
-        <ZoomOutPDFIcon color="#000" size="80%" />
+        <ZoomOutPDFIcon color={textPrimary} size="80%" />
       </ControlButton>
 
       <ControlButton
         id="pdf-zoom-in"
         onMouseDown={() => dispatch(setZoomLevel(zoomLevel + zoomJump))}
       >
-        <ZoomInPDFIcon color="#000" size="80%" />
+        <ZoomInPDFIcon color={textPrimary} size="80%" />
       </ControlButton>
 
       <ControlButton
@@ -64,21 +51,21 @@ const PDFControls: FC<{}> = () => {
         onMouseDown={() => dispatch(setZoomLevel(defaultZoomLevel))}
         disabled={zoomLevel === defaultZoomLevel}
       >
-        <ResetZoomPDFIcon color="#000" size="70%" />
+        <ResetZoomPDFIcon color={textPrimary} size="70%" />
       </ControlButton>
 
-      {numPages > 1 && (
+      {/* {numPages > 1 && (
         <ControlButton
           id="pdf-toggle-pagination"
           onMouseDown={() => dispatch(setPDFPaginated(!paginated))}
         >
           <TogglePaginationPDFIcon
-            color="#000"
+            color={textPrimary}
             size="70%"
             reverse={paginated}
           />
         </ControlButton>
-      )}
+      )} */}
     </Container>
   );
 };
@@ -94,7 +81,7 @@ const Container = styled.div`
   justify-content: flex-end;
   padding: 8px;
   background-color: ${(props: IStyledProps) => props.theme.tertiary};
-  box-shadow: 0px 2px 3px #00000033;
+  box-shadow: 0px 4px 15px -3px rgb(0 0 0 / 40%);
 
   @media (max-width: 768px) {
     padding: 6px;
@@ -102,15 +89,6 @@ const Container = styled.div`
 `;
 
 const ControlButton = styled(Button)`
-  width: 30px;
-  height: 30px;
-  @media (max-width: 768px) {
-    width: 25px;
-    height: 25px;
-  }
-`;
-
-const DownloadButton = styled(LinkButton)`
   width: 30px;
   height: 30px;
   @media (max-width: 768px) {
