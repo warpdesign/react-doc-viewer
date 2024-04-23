@@ -23,9 +23,10 @@
   },
   "scripts": {
     "start": "storybook dev -p 6006",
-    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
+    "build": "rm -rf dist && npm run build:esm && npm run build:cjs && npm run copy-worker",
     "build:esm": "tsc --noEmit false",
     "build:cjs": "tsc --noEmit false --module commonjs --outDir ./dist/cjs",
+    "copy-worker": "cp ./node_modules/react-pdf/node_modules/pdfjs-dist/build/pdf.worker.min.js dist/",
     "test": "react-scripts test --watchAll=false",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
