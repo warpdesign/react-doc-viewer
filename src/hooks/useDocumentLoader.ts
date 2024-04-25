@@ -38,6 +38,12 @@ export const useDocumentLoader = (): {
       const controller = new AbortController();
       const { signal } = controller;
 
+      // Some fetch requests may hang indefinitely:
+      // make sure to abort the call if it takes a too long time.
+      // After a long delay we abort the request to prevent
+      // getting stuck on the loading screen
+      const timeout = setTimeout(() => controller.abort(), 500)
+
       fetch(documentURI, {
         method:
           prefetchMethod || documentURI.startsWith("blob:") ? "GET" : "HEAD",
@@ -48,6 +54,7 @@ export const useDocumentLoader = (): {
           const contentTypeRaw = response.headers.get("content-type");
           const contentTypes = contentTypeRaw?.split(";") || [];
           const contentType = contentTypes.length ? contentTypes[0] : undefined;
+          clearTimeout(timeout)
 
           dispatch(
             updateCurrentDocument({
@@ -57,18 +64,16 @@ export const useDocumentLoader = (): {
           );
         })
         .catch((error) => {
-          if (error?.name !== "AbortError") {
-            // Don't get stuck with the loading component
-            // if we can't fetch the filetype: we'll show
-            // the no renderer component instead
-            dispatch(setDocumentLoading(false));
-            throw error;
-          }
-
+          // Don't get stuck with the loading component
+          // if we can't fetch the filetype: we'll show
+          // the no renderer component instead
+          dispatch(setDocumentLoading(false));
+          throw error;
         });
 
       return () => {
-        controller.abort();
+        controller.abort()
+        clearTimeout(timeout)
       };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps

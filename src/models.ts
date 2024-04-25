@@ -1,4 +1,4 @@
-import { FC, ReactElement, ComponentType, PropsWithChildren } from "react";
+import { FC, ReactElement, ComponentType, PropsWithChildren, ReactNode } from "react";
 import { IMainState } from "./store/mainStateReducer";
 import { FileLoaderFunction } from "./utils/fileLoaders";
 
