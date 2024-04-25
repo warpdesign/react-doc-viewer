@@ -51,9 +51,11 @@ type ContentsProps = {
     } else {
       if (CurrentRenderer) {
         return <CurrentRenderer mainState={state} />;
-      } else if (CurrentRenderer === undefined) {
-        return null;
       } else {
+        // we get here if:
+        // - there was a problem fetching the file type (access denied, cors errors,..)
+        // - there is no rednderer for current file type
+        // in *both* cases we want to show the no Renderer component
         if (config && config?.noRenderer?.overrideComponent) {
           const OverrideComponent = config.noRenderer.overrideComponent;
           return (
