@@ -18,5 +18,5 @@ exports.default = TXTRenderer;
 TXTRenderer.fileTypes = ["txt", "text/plain"];
 TXTRenderer.weight = 0;
 TXTRenderer.fileLoader = fileLoaders_1.textFileLoader;
-var Container = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 30px;\n  white-space: pre;\n"], ["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 30px;\n  white-space: pre;\n"])));
+var Container = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 30px;\n  white-space: pre-wrap;\n"], ["\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n  padding: 30px;\n  white-space: pre-wrap;\n"])));
 var templateObject_1;
