@@ -3,6 +3,7 @@ import React, {
   Dispatch,
   FC,
   PropsWithChildren,
+  useContext,
   useReducer,
 } from "react";
 import { IMainState } from "../../../store/mainStateReducer";
@@ -13,16 +14,17 @@ import {
   PDFStateReducer,
   reducer,
 } from "./reducer";
+import { DocViewerContext } from "../../../store/DocViewerProvider";
 
 const PDFContext = createContext<{
   state: IPDFState;
   dispatch: Dispatch<PDFActions>;
 }>({ state: initialPDFState, dispatch: () => null });
 
-const PDFProvider: FC<PropsWithChildren<{ mainState: IMainState }>> = ({
+const PDFProvider: FC<PropsWithChildren<{ }>> = ({
   children,
-  mainState,
 }) => {
+  const { state: mainState } = useContext(DocViewerContext);
   const [state, dispatch] = useReducer<PDFStateReducer>(reducer, {
     ...initialPDFState,
     defaultZoomLevel:
@@ -34,7 +36,6 @@ const PDFProvider: FC<PropsWithChildren<{ mainState: IMainState }>> = ({
     paginated: mainState.config?.pdfVerticalScrollByDefault
       ? false
       : initialPDFState.paginated,
-    mainState,
   });
 
   return (

@@ -1,5 +1,5 @@
-import React, { FC, useCallback } from "react";
-import styled, { keyframes } from "styled-components";
+import React, { FC, useCallback, useContext } from "react";
+import styled, { DefaultTheme, ThemeContext, keyframes } from "styled-components";
 import { setRendererRect } from "../store/actions";
 import { DocRenderer, IConfig, IDocument, IStyledProps } from "../models";
 import { getFileName } from "../utils/getFileName";
@@ -23,6 +23,9 @@ type ContentsProps = {
 };
 
   const Contents: React.FC<ContentsProps> = ({documents, documentLoading, config, currentDocument, fileName, CurrentRenderer, state, t}) => {
+    const {
+      textTertiary,
+    } = useContext(ThemeContext) as DefaultTheme
 
     if (!documents.length) {
       return <div id="no-documents"></div>;
@@ -43,7 +46,7 @@ type ContentsProps = {
             data-testid="loading-renderer"
           >
             <LoadingIconContainer>
-              <LoadingIcon color="#444" size={40} />
+              <LoadingIcon color={textTertiary} size={40} />
             </LoadingIconContainer>
           </LoadingContainer>
         </LoadingTimeout>
@@ -114,6 +117,7 @@ const Container = styled.div`
   display: flex;
   flex: 1;
   overflow-y: auto;
+  max-width: 100%;
 `;
 
 const LoadingContainer = styled.div`
