@@ -12,7 +12,7 @@ export const DocViewerRenderers = [
   TXTRenderer,
   CSVRenderer,
   VideoRenderer,
-];
+]
 
 export {
   HTMLRenderer,
@@ -21,4 +21,4 @@ export {
   TXTRenderer,
   CSVRenderer,
   VideoRenderer,
-};
+}
