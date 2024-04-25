@@ -25,9 +25,10 @@ export const useRendererSelector = (): {
 
     pluginRenderers?.forEach((r) => {
       if (currentDocument.fileType === undefined) return;
-      if (r.fileTypes.indexOf(currentDocument.fileType) >= 0) {
-        matchingRenderers.push(r);
-      }
+      r.fileTypes.forEach((fileType: string) => {
+        if (currentDocument.fileType === fileType)
+          matchingRenderers.push(r)
+      })
     });
 
     const [SelectedRenderer] = matchingRenderers.sort(
