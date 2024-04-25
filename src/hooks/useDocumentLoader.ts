@@ -29,6 +29,7 @@ export const useDocumentLoader = (): {
 
   const documentURI = currentDocument?.uri || "";
 
+  // Sniff contentType using HEAD fetch
   useEffect(
     () => {
       if (!currentDocument) return;
@@ -69,6 +70,8 @@ export const useDocumentLoader = (): {
     [currentFileNo, documentURI, currentDocument],
   );
 
+  // File changed and/or renderer changed:
+  // fetch entire file and update current document
   useEffect(() => {
     if (!currentDocument || CurrentRenderer === undefined) return;
 
