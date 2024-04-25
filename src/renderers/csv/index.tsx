@@ -11,7 +11,8 @@ const CSVRenderer: DocRenderer = ({
 
   useEffect(() => {
     if (currentDocument?.fileData) {
-      const parseResult = papaparse.parse(currentDocument.fileData as string, {
+      const text = currentDocument.fileData as string
+      const parseResult = papaparse.parse(text.trim() as string, {
         delimiter: config?.csvDelimiter ?? ",",
       });
 
