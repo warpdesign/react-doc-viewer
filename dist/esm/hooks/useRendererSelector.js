@@ -14,9 +14,10 @@ export var useRendererSelector = function () {
         pluginRenderers === null || pluginRenderers === void 0 ? void 0 : pluginRenderers.forEach(function (r) {
             if (currentDocument.fileType === undefined)
                 return;
-            if (r.fileTypes.indexOf(currentDocument.fileType) >= 0) {
-                matchingRenderers.push(r);
-            }
+            r.fileTypes.forEach(function (fileType) {
+                if (currentDocument.fileType === fileType)
+                    matchingRenderers.push(r);
+            });
         });
         var SelectedRenderer = matchingRenderers.sort(function (a, b) { return b.weight - a.weight; })[0];
         if (SelectedRenderer && SelectedRenderer !== undefined) {
