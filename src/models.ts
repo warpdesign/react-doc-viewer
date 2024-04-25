@@ -9,6 +9,7 @@ export interface IConfig {
   csvDelimiter?: string
   pdfZoom?: IPdfZoomConfig
   pdfVerticalScrollByDefault?: boolean
+  txtCodeTheme?: string
 }
 
 export interface ILoadingRendererConfig {

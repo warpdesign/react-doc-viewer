@@ -40,6 +40,7 @@
     "mustache": "^4.2.0",
     "papaparse": "^5.4.1",
     "react-pdf": "7.5.0",
+    "react-syntax-highlighter": "^15.5.0",
     "styled-components": "^6.0.8"
   },
   "devDependencies": {
@@ -64,6 +65,7 @@
     "@types/react-dom": "^18.2.11",
     "@types/react-pdf": "7.0.0",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-syntax-highlighter": "^15.5.11",
     "@types/styled-components": "^5.1.28",
     "@typescript-eslint/eslint-plugin": "^6.7.4",
     "@typescript-eslint/parser": "^6.7.4",
