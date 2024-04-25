@@ -40,7 +40,8 @@ var CSVRenderer = function (_a) {
     (0, react_1.useEffect)(function () {
         var _a, _b;
         if (currentDocument === null || currentDocument === void 0 ? void 0 : currentDocument.fileData) {
-            var parseResult = papaparse_1.default.parse(currentDocument.fileData, {
+            var text = currentDocument.fileData;
+            var parseResult = papaparse_1.default.parse(text.trim(), {
                 delimiter: (_a = config === null || config === void 0 ? void 0 : config.csvDelimiter) !== null && _a !== void 0 ? _a : ",",
             });
             if (!((_b = parseResult.errors) === null || _b === void 0 ? void 0 : _b.length) && parseResult.data) {
@@ -54,13 +55,14 @@ var CSVRenderer = function (_a) {
     return (react_1.default.createElement(Container, null,
         react_1.default.createElement(Table, null,
             react_1.default.createElement("thead", null,
-                react_1.default.createElement("tr", null, rows[0].map(function (column) { return (react_1.default.createElement("th", { key: column }, column)); }))),
-            react_1.default.createElement("tbody", null, rows.slice(1, rows.length).map(function (row) { return (react_1.default.createElement("tr", { key: row.join("") }, row.map(function (column) { return (react_1.default.createElement("td", { key: column }, column)); }))); })))));
+                react_1.default.createElement("tr", null, rows[0].map(function (column, i) { return (react_1.default.createElement("th", { key: "head_".concat(i) }, column)); }))),
+            react_1.default.createElement("tbody", null, rows.map(function (row, i) { return (i ? react_1.default.createElement("tr", { key: "row_".concat(i) }, row.map(function (column, j) { return (react_1.default.createElement("td", { key: "col_".concat(i, "_").concat(j) }, column)); }))
+                : null); })))));
 };
 exports.default = CSVRenderer;
 CSVRenderer.fileTypes = ["csv", "text/csv"];
 CSVRenderer.weight = 0;
 CSVRenderer.fileLoader = fileLoaders_1.textFileLoader;
 var Container = styled_components_1.default.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  width: 100%;\n"], ["\n  width: 100%;\n"])));
-var Table = styled_components_1.default.table(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  text-align: left;\n\n  th,\n  td {\n    padding: 5px 10px;\n\n    &:empty {\n      display: none;\n    }\n  }\n"], ["\n  width: 100%;\n  text-align: left;\n\n  th,\n  td {\n    padding: 5px 10px;\n\n    &:empty {\n      display: none;\n    }\n  }\n"])));
+var Table = styled_components_1.default.table(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  width: 100%;\n  text-align: left;\n  border-collapse: collapse;\n  border: 1px solid ", ";\n  background-color: ", ";\n\n  td {\n    white-space: nowrap;\n  }\n\n  th,\n  td {\n    padding: 5px 10px;\n    border: 1px solid ", ";\n  }\n\n  tr {\n    vertical-align: top;\n  }\n"], ["\n  width: 100%;\n  text-align: left;\n  border-collapse: collapse;\n  border: 1px solid ", ";\n  background-color: ", ";\n\n  td {\n    white-space: nowrap;\n  }\n\n  th,\n  td {\n    padding: 5px 10px;\n    border: 1px solid ", ";\n  }\n\n  tr {\n    vertical-align: top;\n  }\n"])), function (props) { return props.theme.textTertiary; }, function (props) { return props.theme.tertiary; }, function (props) { return props.theme.textTertiary; });
 var templateObject_1, templateObject_2;
