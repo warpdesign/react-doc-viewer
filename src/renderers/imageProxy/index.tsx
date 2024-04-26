@@ -14,7 +14,7 @@ const ImageProxyRenderer: DocRenderer = (props) => {
   return (
     <Container id="image-renderer" {...rest}>
       {children || (
-        <Img id="image-img" src={currentDocument.fileData as string} />
+        <Img id="image-img" src={currentDocument.uri} />
       )}
     </Container>
   );

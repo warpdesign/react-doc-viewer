@@ -26,5 +26,13 @@ const ImagesRenderer: DocRenderer = (props) => <StyledImageRenderer {...props} /
 
 ImagesRenderer.fileTypes = ["png", "gif", "jpg", "jpeg", "bmp", "webp", "svg", "image/png", "image/gif", "image/jpg", "image/jpeg", "image/bmp", "image/webp", "image/svg+xml"];
 ImagesRenderer.weight = 0;
-
+ImagesRenderer.fileLoader = ({ fileLoaderComplete, documentURI }) => {
+  const img = new Image()
+  img.onload = () => {
+    fileLoaderComplete({
+      result: null
+    }  as FileReader)
+  }
+  img.src = documentURI
+}
 export default ImagesRenderer;

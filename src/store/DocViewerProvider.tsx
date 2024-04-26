@@ -77,7 +77,7 @@ const DocViewerProvider = forwardRef<
     if (activeDocument) {
       dispatch(updateCurrentDocument(activeDocument))
     }
-  }, [activeDocument])
+  }, [activeDocument?.uri])
   
   useImperativeHandle(
     ref,
