@@ -20,5 +20,15 @@ var StyledImageRenderer = styled(ImageProxyRenderer)(templateObject_1 || (templa
 var ImagesRenderer = function (props) { return React.createElement(StyledImageRenderer, __assign({}, props)); };
 ImagesRenderer.fileTypes = ["png", "gif", "jpg", "jpeg", "bmp", "webp", "svg", "image/png", "image/gif", "image/jpg", "image/jpeg", "image/bmp", "image/webp", "image/svg+xml"];
 ImagesRenderer.weight = 0;
+ImagesRenderer.fileLoader = function (_a) {
+    var fileLoaderComplete = _a.fileLoaderComplete, documentURI = _a.documentURI;
+    var img = new Image();
+    img.onload = function () {
+        fileLoaderComplete({
+            result: null
+        });
+    };
+    img.src = documentURI;
+};
 export default ImagesRenderer;
 var templateObject_1;

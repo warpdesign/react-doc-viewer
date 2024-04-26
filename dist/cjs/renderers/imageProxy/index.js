@@ -35,7 +35,7 @@ var ImageProxyRenderer = function (props) {
     var currentDocument = props.mainState.currentDocument, children = props.children, rest = __rest(props, ["mainState", "children"]);
     if (!currentDocument)
         return null;
-    return (react_1.default.createElement(Container, __assign({ id: "image-renderer" }, rest), children || (react_1.default.createElement(Img, { id: "image-img", src: currentDocument.fileData }))));
+    return (react_1.default.createElement(Container, __assign({ id: "image-renderer" }, rest), children || (react_1.default.createElement(Img, { id: "image-img", src: currentDocument.uri }))));
 };
 exports.default = ImageProxyRenderer;
 ImageProxyRenderer.fileTypes = [];

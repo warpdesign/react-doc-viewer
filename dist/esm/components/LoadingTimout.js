@@ -12,11 +12,14 @@ export var LoadingTimeout = function (_a) {
             setShouldLoadingRender(true);
         }, typeof ((_a = config === null || config === void 0 ? void 0 : config.loadingRenderer) === null || _a === void 0 ? void 0 : _a.showLoadingTimeout) === "number"
             ? config.loadingRenderer.showLoadingTimeout
-            : 500);
+            : 200);
         return function () { return clearTimeout(timeoutRef); };
     }, [(_c = config === null || config === void 0 ? void 0 : config.loadingRenderer) === null || _c === void 0 ? void 0 : _c.showLoadingTimeout]);
-    if (!shouldLoadingRender) {
-        return null;
-    }
-    return React.createElement(React.Fragment, null, children);
+    // Simple set the loading components'visibility to hidden and don't hide them:
+    // this prevents a reflow when the loader appears.
+    return React.createElement("div", { style: {
+            visibility: !shouldLoadingRender ? 'hidden' : 'visible',
+            display: 'flex',
+            alignContent: 'center'
+        } }, children);
 };

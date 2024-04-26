@@ -59,7 +59,7 @@ var DocViewerProvider = (0, react_1.forwardRef)(function (props, ref) {
         if (activeDocument) {
             dispatch((0, actions_1.updateCurrentDocument)(activeDocument));
         }
-    }, [activeDocument]);
+    }, [activeDocument === null || activeDocument === void 0 ? void 0 : activeDocument.uri]);
     (0, react_1.useImperativeHandle)(ref, function () {
         return { prev: function () {
                 dispatch((0, actions_1.previousDocument)());

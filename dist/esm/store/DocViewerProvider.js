@@ -32,7 +32,7 @@ var DocViewerProvider = forwardRef(function (props, ref) {
         if (activeDocument) {
             dispatch(updateCurrentDocument(activeDocument));
         }
-    }, [activeDocument]);
+    }, [activeDocument === null || activeDocument === void 0 ? void 0 : activeDocument.uri]);
     useImperativeHandle(ref, function () {
         return { prev: function () {
                 dispatch(previousDocument());

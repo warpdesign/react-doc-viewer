@@ -56,9 +56,7 @@ var _fileLoader = function (_a) {
                 case 1:
                     blob = _a.sent();
                     fileReader = new FileReader();
-                    fileReader.addEventListener("loadend", function () {
-                        return fileLoaderComplete(fileReader);
-                    });
+                    fileReader.addEventListener("loadend", function () { return fileLoaderComplete(fileReader); });
                     switch (readerTypeFunction) {
                         case "arrayBuffer":
                             fileReader.readAsArrayBuffer(blob);
