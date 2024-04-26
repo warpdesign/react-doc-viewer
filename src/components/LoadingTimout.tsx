@@ -21,15 +21,17 @@ export const LoadingTimeout: FC<PropsWithChildren> = ({ children }) => {
       },
       typeof config?.loadingRenderer?.showLoadingTimeout === "number"
         ? config.loadingRenderer.showLoadingTimeout
-        : 500,
+        : 200,
     );
 
     return () => clearTimeout(timeoutRef)
-  }, [config?.loadingRenderer?.showLoadingTimeout]);
+  }, [config?.loadingRenderer?.showLoadingTimeout])
 
-  if (!shouldLoadingRender) {
-    return null;
-  }
-
-  return <>{children}</>;
-};
+  // Simple set the loading components'visibility to hidden and don't hide them:
+  // this prevents a reflow when the loader appears.
+  return <div style={{
+    visibility: !shouldLoadingRender ? 'hidden' : 'visible',
+    display: 'flex',
+    alignContent: 'center'
+  }}>{children}</div>
+}
