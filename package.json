@@ -26,7 +26,7 @@
     "build": "rm -rf dist && npm run build:esm && npm run build:cjs && npm run copy-worker",
     "build:esm": "tsc --noEmit false",
     "build:cjs": "tsc --noEmit false --module commonjs --outDir ./dist/cjs",
-    "copy-worker": "cp ./node_modules/react-pdf/node_modules/pdfjs-dist/build/pdf.worker.min.js dist/",
+    "copy-worker": "cp ./node_modules/pdfjs-dist/build/pdf.worker.min.js dist/",
     "test": "react-scripts test --watchAll=false",
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
@@ -41,7 +41,7 @@
     "papaparse": "^5.4.1",
     "react-pdf": "7.5.0",
     "react-syntax-highlighter": "^15.5.0",
-    "styled-components": "^6.0.8"
+    "styled-components": "^6.1.9"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -87,6 +87,9 @@
   "peerDependencies": {
     "react": ">=16.13.1",
     "react-dom": ">=16.13.1"
+  },
+  "overrides": {
+    "typescript": "^5.2.2"
   },
   "browserslist": {
     "production": [

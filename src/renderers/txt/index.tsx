@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { DocRenderer } from "../..";
 import { textFileLoader } from "../../utils/fileLoaders";
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { nord, xcode } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { nord, xcode } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 const mimeToLanguage = {
     'text/x-python-script': 'python',

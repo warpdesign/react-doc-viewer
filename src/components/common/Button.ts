@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled, { WebTarget, css } from "styled-components";
 import { IStyledProps } from "../..";
 
 interface ButtonProps extends IStyledProps {
@@ -13,7 +13,7 @@ export const ButtonSecondaryStyle = css`
   color: ${(props: IStyledProps) => props.theme.textSecondary};
 `;
 
-export const Button = styled.button<ButtonProps>`
+export const Button:WebTarget = styled.button<ButtonProps>`
   ${ButtonPrimaryStyle}
   display: flex;
   justify-content: center;
@@ -40,7 +40,7 @@ export const Button = styled.button<ButtonProps>`
   }
 `;
 
-export const LinkButton = styled.a`
+export const LinkButton:WebTarget = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@ export const LinkButton = styled.a`
   }
 `;
 
-export const ButtonPrimary = styled(Button)``;
-export const ButtonSecondary = styled(Button)`
+export const ButtonPrimary:WebTarget = styled(Button)``;
+export const ButtonSecondary:WebTarget = styled(Button)`
   ${ButtonSecondaryStyle}
 `;
